@@ -31,6 +31,7 @@ const commonConfig = merge([
     ],
   },
   parts.loadCSS(),
+  parts.loadSASS(),
 ]);
 
 const productionConfig = merge([
