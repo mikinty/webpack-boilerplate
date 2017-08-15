@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/mikinty/mitophace.git",
   "author": "mikinty <myou@andrew.cmu.edu>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^3.5.4"
+  }
 }
