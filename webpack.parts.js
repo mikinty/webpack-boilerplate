@@ -100,3 +100,21 @@ exports.purifyCSS = ({ paths }) => ({
     new PurifyCSSPlugin({ paths }),
   ],
 });
+
+// load images inline
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|svg)$/,
+        include,
+        exclude,
+
+        use: {
+          loader: 'url-loader',
+          options,
+        },
+      },
+    ],
+  },
+});
