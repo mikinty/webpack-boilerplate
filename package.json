@@ -1,0 +1,22 @@
+{
+  "name": "mitophace",
+  "version": "1.0.0",
+  "description": "Learning git and project management yo",
+  "main": "index.js",
+  "repository": "https://github.com/mikinty/mitophace.git",
+  "author": "mikinty <myou@andrew.cmu.edu>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\"",
+    "build": "webpack --env production",
+    "lint": "eslint src/ webpack.*.js --cache"
+  },
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "html-webpack-plugin": "^2.30.1",
+    "nodemon": "^1.11.0",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
+  }
+}

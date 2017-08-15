@@ -1,0 +1,11 @@
+# node modules
+node_modules/
+
+# build directory
+build/
+
+# util files
+.eslintcache
+
+# for Mac
+*.DS_Store
