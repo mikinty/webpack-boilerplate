@@ -28,8 +28,11 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
             options: {
               // allow for local classes instead of global
               modules: true,
+              // indicates how many loaders are after css-loader
+              importLoaders: 1,
             },
           },
+          'sass-loader', // in case you import sass into css
         ],
       },
     ],
@@ -43,7 +46,11 @@ exports.loadSASS = ({ include, exclude } = {}) => ({
       test: /\.scss$/,
       include,
       exclude,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader',
+      ],
     }],
   },
 });
