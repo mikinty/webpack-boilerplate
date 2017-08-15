@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["> 1%"] // list of browsers to support
+        }
+      }
+    ]
+  ]
+}

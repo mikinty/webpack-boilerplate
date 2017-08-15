@@ -137,3 +137,23 @@ exports.loadFonts = ({ include, exclude, options } = {}) => ({
     ],
   },
 });
+
+// support for translating ES6 to older versions
+exports.loadJavaScript = ({ include, exclude }) => ({
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include,
+        exclude,
+
+        loader: 'babel-loader',
+        options: {
+          // Enable caching for improved performance during
+          // development.
+          cacheDirectory: true,
+        },
+      },
+    ],
+  },
+});
