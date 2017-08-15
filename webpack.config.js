@@ -33,6 +33,11 @@ const commonConfig = merge([
     ],
   },
   parts.loadSASS(),
+  parts.loadFonts({
+    options: {
+      name: '[name].[ext]',
+    },
+  }),
 ]);
 
 const productionConfig = merge([
