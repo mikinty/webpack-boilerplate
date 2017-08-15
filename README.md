@@ -3,10 +3,10 @@ Hopefully we get some nice version control learning done here. Also an introduct
 
 # Scripts
 ## Building
-..* For __development__: ```yarn start```
-..* For __production__: ```yarn build```
+* For __development__: ```yarn start```
+* For __production__: ```yarn build```
 ## Extras
-..* For __linting__: ```yarn lint```
+* For __linting__: ```yarn lint```
 
 # Technologies used
 ## CLI Tools
