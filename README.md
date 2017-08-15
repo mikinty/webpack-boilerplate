@@ -18,3 +18,6 @@ Hopefully we get some nice version control learning done here. Also an introduct
 
 ## Build/Task Runner
 1. Webpack
+
+## Linting
+1. ESLint - For standardized style throughout the project. You should be able to set up live time linting in your editor.

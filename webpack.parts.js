@@ -100,3 +100,60 @@ exports.purifyCSS = ({ paths }) => ({
     new PurifyCSSPlugin({ paths }),
   ],
 });
+
+// load images inline
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|svg)$/,
+        include,
+        exclude,
+
+        use: {
+          loader: 'url-loader',
+          options,
+        },
+      },
+    ],
+  },
+});
+
+// load fonts
+exports.loadFonts = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        // Capture eot, ttf, woff, and woff2
+        test: /\.(eot|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        include,
+        exclude,
+
+        use: {
+          loader: 'file-loader',
+          options,
+        },
+      },
+    ],
+  },
+});
+
+// support for translating ES6 to older versions
+exports.loadJavaScript = ({ include, exclude }) => ({
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include,
+        exclude,
+
+        loader: 'babel-loader',
+        options: {
+          // Enable caching for improved performance during
+          // development.
+          cacheDirectory: true,
+        },
+      },
+    ],
+  },
+});

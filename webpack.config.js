@@ -33,6 +33,12 @@ const commonConfig = merge([
     ],
   },
   parts.loadSASS(),
+  parts.loadFonts({
+    options: {
+      name: '[name].[ext]',
+    },
+  }),
+  parts.loadJavaScript({ include: PATHS.app }),  
 ]);
 
 const productionConfig = merge([
@@ -43,6 +49,13 @@ const productionConfig = merge([
   parts.purifyCSS({
     paths: glob.sync(`${PATHS.src}/**/*.js`, { nodir: true }),
   }),
+  // load images
+  parts.loadImages({
+    options: {
+      limit: 15000, // uses file-loader if over
+      name: '[name].[ext]',
+    },
+  }),
 ]);
 
 const developmentConfig = merge([
@@ -52,6 +65,7 @@ const developmentConfig = merge([
     port: process.env.PORT,
   }),
   parts.loadCSS(),
+  parts.loadImages(),  
 ]);
 
 module.exports = (env) => {
