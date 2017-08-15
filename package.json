@@ -1,0 +1,9 @@
+{
+  "name": "mitophace",
+  "version": "1.0.0",
+  "description": "Learning git and project management yo",
+  "main": "index.js",
+  "repository": "https://github.com/mikinty/mitophace.git",
+  "author": "mikinty <myou@andrew.cmu.edu>",
+  "license": "MIT"
+}
