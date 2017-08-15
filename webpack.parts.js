@@ -1,3 +1,4 @@
+// settings for webpack dev server
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
     historyApiFallback: true,
@@ -8,5 +9,20 @@ exports.devServer = ({ host, port } = {}) => ({
       errors: true,
       warnings: true,
     },
+  },
+});
+
+// rules for loading CSS
+exports.loadCSS = ({ include, exclude } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        include,
+        exclude,
+
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
 });
