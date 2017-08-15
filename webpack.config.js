@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 
+const glob = require('glob');
+
 // webpack parts file
 const parts = require('./webpack.parts');
 
@@ -36,6 +38,10 @@ const commonConfig = merge([
 const productionConfig = merge([
   parts.extractCSS({
     use: ['css-loader', parts.autoprefix()],
+  }),
+  // needs to run AFTER extract text plugin
+  parts.purifyCSS({
+    paths: glob.sync(`${PATHS.src}/**/*.js`, { nodir: true }),
   }),
 ]);
 
