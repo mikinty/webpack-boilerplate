@@ -6,7 +6,14 @@
   "repository": "https://github.com/mikinty/mitophace.git",
   "author": "mikinty <myou@andrew.cmu.edu>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\"",
+    "build": "webpack --env production"
+  },
   "devDependencies": {
-    "webpack": "^3.5.4"
+    "html-webpack-plugin": "^2.30.1",
+    "nodemon": "^1.11.0",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1"
   }
 }
