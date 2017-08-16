@@ -3,6 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
 
 // settings for webpack dev server
 exports.devServer = ({ host, port } = {}) => ({
@@ -180,9 +182,20 @@ exports.clean = (path) => ({
   ],
 });
 
-// minify build size
+// minify js build size
 exports.minifyJavaScript = () => ({
   plugins: [
     new BabiliPlugin(),
+  ],
+});
+
+// minify css build size
+exports.minifyCSS = ({ options }) => ({
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: options,
+      canPrint: false,
+    }),
   ],
 });
