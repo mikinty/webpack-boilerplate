@@ -47,10 +47,15 @@ const productionConfig = merge([
       vendor: ['react'],
     },
   },
-  // for bundle splitting
+  // for bundle splitting, automatically searches through node_modules
   parts.extractBundles([
     {
       name: 'vendor',
+      minChunks: ({ resource }) => (
+        resource &&
+        resource.indexOf('node_modules') >= 0 &&
+        resource.match(/\.js$/)
+      ),
     },
   ]),
   parts.generateSourceMaps({ type: 'source-map' }),  
