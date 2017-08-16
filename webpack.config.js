@@ -46,6 +46,12 @@ const productionConfig = merge([
     entry: {
       vendor: ['react'],
     },
+    // warn user when the build size is too big
+    performance: {
+      hints: 'warning', // 'error' or false are valid too
+      maxEntrypointSize: 100000, // in bytes
+      maxAssetSize: 450000, // in bytes
+    },
   },
   // for bundle splitting, automatically searches through node_modules
   parts.extractBundles([
