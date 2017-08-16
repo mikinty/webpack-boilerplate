@@ -1,5 +1,7 @@
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // settings for webpack dev server
 exports.devServer = ({ host, port } = {}) => ({
@@ -156,4 +158,23 @@ exports.loadJavaScript = ({ include, exclude }) => ({
       },
     ],
   },
+});
+
+// for generating source maps
+exports.generateSourceMaps = ({ type }) => ({
+  devtool: type,
+});
+
+// allow for more bundle splitting options
+exports.extractBundles = (bundles) => ({
+  plugins: bundles.map((bundle) => (
+    new webpack.optimize.CommonsChunkPlugin(bundle)
+  )),
+});
+
+// clean webpack build directory
+exports.clean = (path) => ({
+  plugins: [
+    new CleanWebpackPlugin([path]),
+  ],
 });

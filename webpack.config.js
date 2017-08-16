@@ -42,6 +42,24 @@ const commonConfig = merge([
 ]);
 
 const productionConfig = merge([
+  {
+    entry: {
+      vendor: ['react'],
+    },
+  },
+  // for bundle splitting, automatically searches through node_modules
+  parts.extractBundles([
+    {
+      name: 'vendor',
+      minChunks: ({ resource }) => (
+        resource &&
+        resource.indexOf('node_modules') >= 0 &&
+        resource.match(/\.js$/)
+      ),
+    },
+  ]),
+  parts.clean(PATHS.build),  
+  parts.generateSourceMaps({ type: 'source-map' }),  
   parts.extractCSS({
     use: ['css-loader', parts.autoprefix()],
   }),
@@ -59,6 +77,12 @@ const productionConfig = merge([
 ]);
 
 const developmentConfig = merge([
+  {
+    output: {
+      devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]',
+    },
+  },
+  parts.generateSourceMaps({ type: 'cheap-module-eval-source-map' }),
   parts.devServer({
     // customize host/port here if necessary
     host: process.env.HOST,
