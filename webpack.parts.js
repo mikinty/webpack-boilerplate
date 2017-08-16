@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
 
 // settings for webpack dev server
 exports.devServer = ({ host, port } = {}) => ({
@@ -176,5 +177,12 @@ exports.extractBundles = (bundles) => ({
 exports.clean = (path) => ({
   plugins: [
     new CleanWebpackPlugin([path]),
+  ],
+});
+
+// minify build size
+exports.minifyJavaScript = () => ({
+  plugins: [
+    new BabiliPlugin(),
   ],
 });
