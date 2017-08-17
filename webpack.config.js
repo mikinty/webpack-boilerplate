@@ -35,7 +35,7 @@ const commonConfig = merge([
   parts.loadSASS(),
   parts.loadFonts({
     options: {
-      name: '[name].[ext]',
+      name: '[name].[hash:8].[ext]',
     },
   }),
   parts.loadJavaScript({ include: PATHS.app }),  
@@ -52,6 +52,10 @@ const productionConfig = merge([
       maxEntrypointSize: 100000, // in bytes
       maxAssetSize: 450000, // in bytes
     },
+    output: {
+      chunkFilename: '[name].[chunkhash:8].js',
+      filename: '[name].[chunkhash:8].js',
+    },
   },
   // for bundle splitting, automatically searches through node_modules
   parts.extractBundles([
@@ -65,7 +69,11 @@ const productionConfig = merge([
     },
   ]),
   parts.clean(PATHS.build),
-  parts.minifyJavaScript(), 
+  parts.minifyJavaScript(),
+  parts.setFreeVariable(
+    'process.env.NODE_ENV',
+    'production'
+  ),
   parts.minifyCSS({
     options: {
       discardComments: {
@@ -87,7 +95,7 @@ const productionConfig = merge([
   parts.loadImages({
     options: {
       limit: 15000, // uses file-loader if over
-      name: '[name].[ext]',
+      name: '[name].[hash:8].[ext]',
     },
   }),
 ]);
