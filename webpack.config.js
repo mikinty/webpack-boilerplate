@@ -60,6 +60,7 @@ const productionConfig = merge([
     plugins: [
       new webpack.HashedModuleIdsPlugin(),
     ],
+    recordsPath: path.join(__dirname, 'records.json'),
   },
   // for bundle splitting, automatically searches through node_modules
   parts.extractBundles([
