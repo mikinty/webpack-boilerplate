@@ -6,6 +6,7 @@ build/
 
 # util files
 .eslintcache
+stats.json
 
 # for Mac
 *.DS_Store

@@ -2,6 +2,9 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
 
 // settings for webpack dev server
 exports.devServer = ({ host, port } = {}) => ({
@@ -64,7 +67,7 @@ exports.loadSASS = ({ include, exclude } = {}) => ({
 exports.extractCSS = ({ include, exclude, use }) => {
   // Output extracted CSS to a file
   const plugin = new ExtractTextPlugin({
-    filename: '[name].css',
+    filename: '[name].[contenthash:8].css',
   });
 
   return {
@@ -178,3 +181,33 @@ exports.clean = (path) => ({
     new CleanWebpackPlugin([path]),
   ],
 });
+
+// minify js build size
+exports.minifyJavaScript = () => ({
+  plugins: [
+    new BabiliPlugin(),
+  ],
+});
+
+// minify css build size
+exports.minifyCSS = ({ options }) => ({
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: options,
+      canPrint: false,
+    }),
+  ],
+});
+
+// webpack define plugin for env variable
+exports.setFreeVariable = (key, value) => {
+  const env = {};
+  env[key] = JSON.stringify(value);
+
+  return {
+    plugins: [
+      new webpack.DefinePlugin(env),
+    ],
+  };
+};

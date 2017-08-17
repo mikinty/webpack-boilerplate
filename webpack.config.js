@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
@@ -35,7 +36,7 @@ const commonConfig = merge([
   parts.loadSASS(),
   parts.loadFonts({
     options: {
-      name: '[name].[ext]',
+      name: '[name].[hash:8].[ext]',
     },
   }),
   parts.loadJavaScript({ include: PATHS.app }),  
@@ -46,6 +47,20 @@ const productionConfig = merge([
     entry: {
       vendor: ['react'],
     },
+    // warn user when the build size is too big
+    performance: {
+      hints: 'warning', // 'error' or false are valid too
+      maxEntrypointSize: 100000, // in bytes
+      maxAssetSize: 450000, // in bytes
+    },
+    output: {
+      chunkFilename: '[name].[chunkhash:8].js',
+      filename: '[name].[chunkhash:8].js',
+    },
+    plugins: [
+      new webpack.HashedModuleIdsPlugin(),
+    ],
+    recordsPath: path.join(__dirname, 'records.json'),
   },
   // for bundle splitting, automatically searches through node_modules
   parts.extractBundles([
@@ -57,8 +72,26 @@ const productionConfig = merge([
         resource.match(/\.js$/)
       ),
     },
+    {
+      name: 'manifest',
+      minChunks: Infinity,
+    },
   ]),
-  parts.clean(PATHS.build),  
+  parts.clean(PATHS.build),
+  parts.minifyJavaScript(),
+  parts.setFreeVariable(
+    'process.env.NODE_ENV',
+    'production'
+  ),
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true,
+      },
+      // Run cssnano in safe mode to avoid unsafe transformations.
+      safe: true,
+    },
+  }),
   parts.generateSourceMaps({ type: 'source-map' }),  
   parts.extractCSS({
     use: ['css-loader', parts.autoprefix()],
@@ -71,7 +104,7 @@ const productionConfig = merge([
   parts.loadImages({
     options: {
       limit: 15000, // uses file-loader if over
-      name: '[name].[ext]',
+      name: '[name].[hash:8].[ext]',
     },
   }),
 ]);
