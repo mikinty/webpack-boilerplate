@@ -5,11 +5,20 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: 'eslint:recommended',
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   parser: 'babel-eslint',  
   parserOptions: {
     sourceType: 'module',
-    allowImportExportEverywhere: true,    
+    allowImportExportEverywhere: true,
+
+    // Enable JSX
+    ecmaFeatures: {
+      jsx: true,
+    },
+
+    plugins: [
+      'react',
+    ],
   },
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
