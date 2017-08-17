@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
@@ -56,6 +57,9 @@ const productionConfig = merge([
       chunkFilename: '[name].[chunkhash:8].js',
       filename: '[name].[chunkhash:8].js',
     },
+    plugins: [
+      new webpack.HashedModuleIdsPlugin(),
+    ],
   },
   // for bundle splitting, automatically searches through node_modules
   parts.extractBundles([
