@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // settings for webpack dev server
 exports.devServer = ({ host, port } = {}) => ({
@@ -211,3 +212,24 @@ exports.setFreeVariable = (key, value) => {
     ],
   };
 };
+
+// for multiple pages
+exports.page = ({
+  path = '',
+  template = require.resolve(
+    'html-webpack-plugin/default_index.ejs'
+  ),
+  title,
+  entry,
+  chunks,
+} = {}) => ({
+  entry,
+  plugins: [
+    new HtmlWebpackPlugin({
+      chunks,
+      filename: `${path && path + '/'}index.html`,
+      template,
+      title,
+    }),
+  ],
+});

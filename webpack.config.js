@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 
 const glob = require('glob');
@@ -17,21 +16,10 @@ const PATHS = {
 // configuration shared by production and development
 const commonConfig = merge([
   {
-  // Entries have to resolve to files! They rely on Node
-  // convention by default so if a directory contains *index.js*,
-  // it resolves to that.
-    entry: {
-      main: PATHS.src,
-    },
     output: {
       path: PATHS.build,
       filename: '[name].js',
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: 'Mitophace',
-      }),
-    ],
   },
   parts.loadSASS(),
   parts.loadFonts({
@@ -126,9 +114,26 @@ const developmentConfig = merge([
 ]);
 
 module.exports = (env) => {
-  if (env === 'production') {
-    return merge(commonConfig, productionConfig);
-  }
+  const pages = [
+    parts.page({
+      title: 'Main',
+      entry: {
+        main: PATHS.src,
+      },
+      chunks: ['main', 'manifest', 'vendor'],
+    }),
+    parts.page({
+      title: 'another',
+      path: 'another',
+      entry: {
+        another: path.join(PATHS.src, 'another.js'),
+      },
+      chunks: ['another', 'manifest', 'vendor'],
+    }),
+  ];
 
-  return merge(commonConfig, developmentConfig);
+  const config = (env === 'production') ?
+    productionConfig : developmentConfig;
+
+  return merge([commonConfig, config].concat(pages));
 };
