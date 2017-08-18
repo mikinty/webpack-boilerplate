@@ -18,7 +18,17 @@ exports.devServer = ({ host, port } = {}) => ({
       errors: true,
       warnings: true,
     },
+
+    // HMR
+    hotOnly: true, // don't refresh if hmr fails
+
+    // if you want refresh on errors too, set
+    // hot: true
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ],
 });
 
 // rules for loading CSS
