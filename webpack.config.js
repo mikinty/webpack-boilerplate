@@ -120,6 +120,7 @@ module.exports = (env) => {
       entry: {
         main: PATHS.src,
       },
+      chunks: ['main', 'manifest', 'vendor'],
     }),
     parts.page({
       title: 'another',
@@ -127,13 +128,12 @@ module.exports = (env) => {
       entry: {
         another: path.join(PATHS.src, 'another.js'),
       },
+      chunks: ['another', 'manifest', 'vendor'],
     }),
   ];
 
   const config = (env === 'production') ?
     productionConfig : developmentConfig;
 
-  const analyze = pages.map(page => merge(commonConfig, config, page));
-
-  return pages.map(page => merge(commonConfig, config, page));
+  return merge([commonConfig, config].concat(pages));
 };
