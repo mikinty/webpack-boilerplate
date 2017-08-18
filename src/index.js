@@ -1,5 +1,5 @@
 // import styling
-import './css/main.css';
+import './css/main.scss';
 import 'react';
 
 // import utils

@@ -1,4 +1,4 @@
-import './css/main.css';
+import './css/main.scss';
 import component from './component';
 
 let demoComponent = component('Another');
