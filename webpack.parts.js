@@ -36,7 +36,7 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(scss|css)$/,
         include,
         exclude,
 
@@ -45,8 +45,6 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
           {
             loader: 'css-loader',
             options: {
-              // allow for local classes instead of global
-              modules: true,
               // indicates how many loaders are after css-loader
               importLoaders: 1,
             },

@@ -1,13 +1,11 @@
-import styles from './css/main.scss';
+import './css/main.scss';
 
 export default (text = 'Setup') => {
   const element = document.createElement('div');
 
   element.innerHTML = text;
 
-  console.log(styles);
-
-  element.className = styles.redButton;
+  element.className = 'redButton';
 
   element.onclick = () => {
     import('./lazy').then((lazy) => {

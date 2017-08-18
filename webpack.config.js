@@ -26,7 +26,7 @@ const commonConfig = merge([
       }),
     ],
   },
-  parts.loadSASS(),
+  // parts.loadSASS(),
   parts.loadFonts({
     options: {
       name: '[name].[hash:8].[ext]',
@@ -89,7 +89,7 @@ const productionConfig = merge([
   }),
   parts.generateSourceMaps({ type: 'source-map' }),  
   parts.extractCSS({
-    use: ['css-loader', parts.autoprefix()],
+    use: ['css-loader', parts.autoprefix(), 'sass-loader'],
   }),
   // needs to run AFTER extract text plugin
   parts.purifyCSS({
