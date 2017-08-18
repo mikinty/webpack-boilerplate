@@ -26,7 +26,6 @@ const commonConfig = merge([
       }),
     ],
   },
-  // parts.loadSASS(),
   parts.loadFonts({
     options: {
       name: '[name].[hash:8].[ext]',
