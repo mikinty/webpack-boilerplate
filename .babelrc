@@ -10,5 +10,15 @@
       }
     ]
   ],
-  "plugins": ["syntax-dynamic-import"] // for import statements  
+  "plugins": ["syntax-dynamic-import"], // for import statements
+  "env": {
+    "karma": {
+      "plugins": [
+        [
+          "istanbul",
+          { "exclude": ["tests/*.test.js"] }
+        ]
+      ]
+    }
+  }
 }
