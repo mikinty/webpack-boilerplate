@@ -16,12 +16,6 @@ const PATHS = {
 // configuration shared by production and development
 const commonConfig = merge([
   {
-  // Entries have to resolve to files! They rely on Node
-  // convention by default so if a directory contains *index.js*,
-  // it resolves to that.
-    entry: {
-      main: PATHS.src,
-    },
     output: {
       path: PATHS.build,
       filename: '[name].js',
@@ -121,15 +115,25 @@ const developmentConfig = merge([
 
 module.exports = (env) => {
   const pages = [
-    parts.page({ title: 'Main' }),
+    parts.page({
+      title: 'Main',
+      entry: {
+        main: PATHS.src,
+      },
+    }),
     parts.page({
       title: 'another',
       path: 'another',
+      entry: {
+        another: path.join(PATHS.src, 'another.js'),
+      },
     }),
   ];
 
   const config = (env === 'production') ?
     productionConfig : developmentConfig;
+
+  const analyze = pages.map(page => merge(commonConfig, config, page));
 
   return pages.map(page => merge(commonConfig, config, page));
 };
