@@ -56,22 +56,6 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
   },
 });
 
-// SASS is an awesome and powerful CSS preprocessor
-exports.loadSASS = ({ include, exclude } = {}) => ({
-  module: {
-    rules: [{
-      test: /\.scss$/,
-      include,
-      exclude,
-      use: [
-        'style-loader',
-        'css-loader',
-        'sass-loader',
-      ],
-    }],
-  },
-});
-
 // separating CSS from JS for faster loading
 exports.extractCSS = ({ include, exclude, use }) => {
   // Output extracted CSS to a file
@@ -83,7 +67,7 @@ exports.extractCSS = ({ include, exclude, use }) => {
     module: {
       rules: [
         {
-          test: /\.css$/,
+          test: /\.(scss|css)$/,
           include,
           exclude,
 
