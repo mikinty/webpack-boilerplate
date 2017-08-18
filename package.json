@@ -7,6 +7,7 @@
   "author": "mikinty <myou@andrew.cmu.edu>",
   "license": "MIT",
   "scripts": {
+    "deploy": "gh-pages -d build",
     "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\"",
     "build": "webpack --env production",
     "lint": "eslint src/ webpack.*.js --cache",
@@ -31,6 +32,7 @@
     "eslint": "^4.4.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "gh-pages": "^1.0.0",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^2.30.1",
     "karma": "^1.7.0",
