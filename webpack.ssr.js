@@ -5,7 +5,7 @@ const parts = require('./webpack.parts');
 
 const PATHS = {
   build: path.join(__dirname, 'static'),
-  ssrDemo: path.join(__dirname, 'app', 'ssr.js'),
+  ssrDemo: path.join(__dirname, 'src', 'ssr.js'),
 };
 
 module.exports = merge([

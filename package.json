@@ -9,6 +9,7 @@
   "scripts": {
     "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\"",
     "build": "webpack --env production",
+    "build:ssr": "webpack --config webpack.ssr.js",
     "lint": "eslint src/ webpack.*.js --cache",
     "stats": "webpack --env production --profile --json > stats.json"
   },
@@ -26,6 +27,7 @@
     "cssnano": "^3.10.0",
     "eslint": "^4.4.1",
     "eslint-plugin-react": "^7.2.1",
+    "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "glob": "^7.1.2",
