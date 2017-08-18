@@ -49,7 +49,7 @@ const productionConfig = merge([
       chunkFilename: '[name].[chunkhash:8].js',
       filename: '[name].[chunkhash:8].js',
       // matches GitHub project name
-      publicPath: '/webpack-boilerplate/',
+      // publicPath: '/webpack-boilerplate/',
     },
     plugins: [
       new webpack.HashedModuleIdsPlugin(),
