@@ -20,6 +20,11 @@ const commonConfig = merge([
       path: PATHS.build,
       filename: '[name].js',
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+      }),
+    ],
   },
   parts.loadSASS(),
   parts.loadFonts({
